@@ -1,83 +1,108 @@
 # 🧠 Machine Learning to Analyze Brain of Zebrafish
 
-> This repository summarizes my internship work at **Laboratoire Jean Perrin, Sorbonne Université**, where I applied machine learning techniques — specifically, **compositional Restricted Boltzmann Machines (cRBMs)** — to analyze neural activity in zebrafish.
+**👤 Author**: Ans Imran  
+**🏛️ Lab**: Laboratoire Jean Perrin (LJP), Sorbonne Université  
+**⏳ Duration**: 5 months & 5 days  
+**🔬 Focus**: Machine Learning for Neural Data Analysis  
 
 ---
 
-## 🚀 Summary
+## 📌 Summary of Work
 
-- 🧬 **Project Focus**: Functional connectivity modeling in zebrafish larvae brain using cRBMs.
-- 🧠 **Data**: Whole-brain calcium imaging data (SPIM-based), ~40,000 neurons, voxel-averaged activity.
-- 🤖 **ML Approach**: Compositional Restricted Boltzmann Machines with **L2L1 regularization**.
-- 📈 **Optimization**: Hyperparameter search for regularization strength (λ) to balance underfitting/overfitting.
-- 🔄 **Generative Modeling**: cRBMs learned hidden assemblies and generated statistically similar neural activity.
-- 📊 **Analysis**: PCA, K-means clustering, RMSE metrics, and functional connectivity comparisons.
-- 🧩 **Key Finding**: Functional connectivity matrices are consistent across models — robust to model imperfections.
-- 💡 **Tools Used**: Python, NumPy, scikit-learn, matplotlib, PCA, k-means, identity plots, heatmaps.
+- 🛠️ Tuned the regularization parameter (λ) for compositional Restricted Boltzmann Machines (cRBMs) to improve training stability and reduce overfitting.
+- 🧠 Used cRBMs to model functional connectivity in zebrafish brain data recorded from ~40,000 neurons.
+- 📏 Evaluated models based on how well they reproduced brain activity statistics using nRMSE metrics.
+- 📊 Analyzed connectivity patterns using PCA and K-means clustering.
+- ✅ Built a pipeline to identify reliable (“good”) models based on performance thresholds.
 
 ---
 
-## 📂 Project Breakdown
+## 🔍 Project Overview
 
-### 1. **Scientific Context**
-- **Goal**: Extract interpretable neural assemblies and functional connections from large-scale zebrafish brain recordings.
-- **Why ML?**: Manual/heuristic methods fail at whole-brain scale; generative models (cRBMs) offer interpretable, scalable alternatives.
+### 1️⃣ Regularization Tuning
 
-### 2. **Model Architecture**
-- **cRBMs**: Probabilistic generative models with visible units (voxels) and hidden units (assemblies).
-- **Regularization**: Employed custom **L2L1** regularization for controlled sparsity.
-- **Training**: Models trained on individual fish using z-scored voxel activity.
+**🎯 Goal**: Find the right λ value for L2L1 regularization in cRBMs to avoid overfitting while keeping the model useful.
 
-### 3. **Hyperparameter Optimization**
-- **Main Task**: Tune λ (L2L1 regularization) to:
-  - Reduce overfitting
-  - Minimize bad models (nRMSE > 1 or NaN)
-  - Reproduce key statistics of brain activity
-- **Evaluation Metrics**:
-  - Mean voxel activity ⟨v⟩, hidden unit activity ⟨h⟩
-  - Pairwise interactions: ⟨vv⟩, ⟨vh⟩, ⟨hh⟩
-  - **nRMSE** scores used to assess model fidelity
+**🔧 What I Did**:
+- Trained 600+ models across two λ ranges: `[0.005–0.1]` and `[0.5–5.0]`.
+- Measured each model’s ability to reproduce 5 brain activity statistics.
+- Defined “bad” models as those with nRMSE > 1.0 or NaN.
+- Found λ = **0.09** to work best:
+  - <10% bad models  
+  - nRMSE norm ≤ 0.55
 
-### 4. **Functional Connectivity Analysis**
-- **Coupling Matrix**: Computed from learned weights; reflects voxel-to-voxel interaction strength.
-- **Consistency Check**:
-  - Models with different λ produce similar coupling matrices
-  - Matrix structure is stable across cRBMs — even “bad” models
-- **Dimensionality Reduction**: PCA showed two clear matrix clusters (based on λ range).
-- **Clustering**: K-means validated that matrix structure stems from regularization-induced sparsity.
-
-### 5. **Key Results**
-- ✅ **Optimal λ ≈ 0.09**: Best balance between model accuracy and sparsity.
-- 📉 **< 10% bad cRBMs** in optimal λ range.
-- 🔁 **Cross-model similarity**: Functional connectivity matrix conserved across cRBMs.
-- 🧠 **Inference**: Robust voxel assemblies exist and are identifiable despite neuron-level noise.
+**💡 Concepts Used**:
+- Hyperparameter tuning  
+- L2L1 regularization  
+- Model evaluation (custom metrics)  
+- Train/test splitting
 
 ---
 
-## 🛠️ Technical Skills Demonstrated
+### 2️⃣ Functional Connectivity Analysis
 
-| Skill                             | Description |
-|----------------------------------|-------------|
-| **Unsupervised Learning**        | Training generative models (cRBMs) on high-dimensional time-series brain data |
-| **Hyperparameter Optimization**  | Grid search over λ, error analysis using nRMSE |
-| **Model Evaluation**             | Identity plots, custom nRMSE metrics, failure analysis |
-| **Statistical Analysis**         | PCA, clustering (k-means), histogram comparisons |
-| **Data Engineering**             | Voxel-based preprocessing of zebrafish brain imaging data |
-| **Visualization**                | Heatmaps, PCA plots, polar plots, identity plots |
-| **Scientific Communication**     | Generated interpretive figures and built reproducible analysis pipelines |
+**🎯 Goal**: Test if connectivity patterns stay consistent across models with different λ values.
 
----
+**🔧 What I Did**:
+- Generated coupling (connectivity) matrices from model weights.
+- Flattened and projected them using PCA.
+- Grouped them using K-means clustering.
+- Found two clear clusters based on λ range, but structure of voxel connections was preserved.
 
-## 📌 What's Next?
-
-- Train cross-subject cRBMs to explore **shared neural assemblies** across multiple zebrafish.
-- Investigate how **functional connectivity maps** relate to **structural connectivity**.
-- Extend findings to other datasets and brain models.
+**💡 Concepts Used**:
+- PCA (dimensionality reduction)  
+- K-means clustering  
+- nRMSE for matrix similarity
 
 ---
 
-## 📚 Reference
+### 3️⃣ Model Evaluation
 
-The project is based on and extends findings from:  
-🧾 [van der Plas et al. (2023), eLife](https://doi.org/10.7554/eLife.83139)
+**🎯 Goal**: Define a way to identify models that generalize well to unseen data.
 
+**🔧 What I Did**:
+- Used 4 of the 5 brain statistics to compute a 4D error vector per model.
+- Calculated the L2 norm of this vector.
+- Models with norms ≤ 0.55 were considered “good”.
+- Confirmed results using visual tools like identity and polar plots.
+
+**💡 Concepts Used**:
+- Custom model scoring  
+- Error thresholding  
+- Diagnostic plotting
+
+---
+
+### 4️⃣ Tools and Workflow
+
+| 🧩 Area             | ⚙️ Tools/Concepts Used                           |
+|--------------------|--------------------------------------------------|
+| Data Preparation   | Voxelization, z-score normalization              |
+| Modeling           | cRBMs with L2L1 regularization                   |
+| Evaluation & Viz   | nRMSE, heatmaps, polar plots, PCA, K-means      |
+| Programming        | Python, NumPy, SciPy, scikit-learn, matplotlib   |
+| Environment        | Jupyter Notebooks                                |
+
+---
+
+## ✅ Conclusion
+
+- Regularization strength directly impacted both model quality and sparsity.
+- λ in the range [0.05–0.1] produced the best results.
+- Even lower-performing models showed similar connectivity structures.
+- Functional relationships between brain voxels can be consistently captured by cRBMs.
+
+---
+
+## 🔄 Future Work
+
+- Extend training to multiple zebrafish to test pattern consistency across individuals.
+- Compare inferred functional connectivity to known structural connectivity if available.
+
+---
+
+## 📎 Appendix
+
+- 📄 Full Report: [Ans IMRAN - internship report updated.pdf](./Ans%20IMRAN%20-%20internship%20report%20updated.pdf)  
+- 🧾 Code: *[Link to repository if available]*  
+- 📊 Visuals: Included in the report (e.g., coupling matrices, PCA plots, nRMSE trends)
