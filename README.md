@@ -1,4 +1,4 @@
-# **Text After Images**
+# **Internship details start after the images.**
 
 <img src="/figures/1.jpg" alt="1" width="1000"/>
 <img src="/figures/2.jpg" alt="2" width="1000"/>
@@ -89,7 +89,7 @@
 | Data Preparation   | Voxelization, z-score normalization              |
 | Modeling           | cRBMs with L2L1 regularization                   |
 | Evaluation & Viz   | nRMSE, heatmaps, polar plots, PCA, K-means      |
-| Programming        | Python, NumPy, SciPy, scikit-learn, matplotlib   |
+| Programming        | Python, Julia, NumPy, SciPy, scikit-learn, matplotlib   |
 | Environment        | Jupyter Notebooks                                |
 
 ---
@@ -112,6 +112,6 @@
 
 ## 📎 Appendix
 
-- 📄 Full Report: [Ans IMRAN - internship report updated.pdf](./Ans%20IMRAN%20-%20internship%20report%20updated.pdf)  
-- 🧾 Code: *[Link to repository if available]*  
+- 📄 Full Report: [internship report](Full Internship Report.pdf)  
+- 🧾 Code: *the code is private (property of Laboratoire Jean Perrin)*  
 - 📊 Visuals: Included in the report (e.g., coupling matrices, PCA plots, nRMSE trends)
