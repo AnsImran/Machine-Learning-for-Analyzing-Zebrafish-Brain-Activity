@@ -106,7 +106,6 @@
 ## 🔄 Future Work
 
 - Extend training to multiple zebrafish to test pattern consistency across individuals.
-- Compare inferred functional connectivity to known structural connectivity if available.
 
 ---
 
