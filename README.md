@@ -111,6 +111,6 @@
 
 ## 📎 Appendix
 
-- 📄 Full Report: [internship report](Full Internship Report.pdf)  
+- 📄 Full Report: [Internship Report](Full Internship Report.pdf)
 - 🧾 Code: *the code is private (property of Laboratoire Jean Perrin)*  
 - 📊 Visuals: Included in the report (e.g., coupling matrices, PCA plots, nRMSE trends)
