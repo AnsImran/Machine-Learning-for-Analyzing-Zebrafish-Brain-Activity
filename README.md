@@ -1,3 +1,12 @@
+# **Text After Images**
+
+<img src="/figures/1.jpg" alt="1" width="1000"/>
+<img src="/figures/2.jpg" alt="2" width="1000"/>
+<img src="/figures/3.jpg" alt="3" width="1000"/>
+<img src="/figures/l2l1__vs__norms_of_nrmse_vecs__and__percentage_of_explosions.jpg" alt="4" width="1000"/>
+
+
+
 # 🧠 Machine Learning to Analyze Brain of Zebrafish
 
 **👤 Author**: Ans Imran  
